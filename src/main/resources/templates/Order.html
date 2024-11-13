@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách Đơn hàng</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Danh sách Đơn hàng</h2>
+
+    <form action="/order/filter" method="get">
+        <label for="startDate">Ngày bắt đầu:</label>
+        <input type="date" id="startDate" name="startDate" required>
+
+        <label for="endDate">Ngày kết thúc:</label>
+        <input type="date" id="endDate" name="endDate" required>
+
+        <label for="limit">Số lượng đơn hàng muốn xem:</label>
+        <input type="number" id="limit" name="limit" min="1" max="100" value="10">
+
+        <button type="submit" class="btn btn-primary">Xem danh sách</button>
+    </form>
+
+    <table class="table table-bordered mt-4">
+        <thead>
+        <tr>
+            <th>Số thứ tự</th>
+            <th>Mã đơn hàng</th>
+            <th>Tên sản phẩm</th>
+            <th>Giá sản phẩm</th>
+            <th>Loại sản phẩm</th>
+            <th>Ngày mua</th>
+            <th>Số lượng</th>
+            <th>Tổng tiền</th>
+            <th>Chỉnh sửa</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="donHang, iterStat : ${donHangList}">
+            <td th:text="${iterStat.index + 1}"></td>
+            <td th:text="${donHang.maDonHang}"></td>
+            <td th:text="${donHang.tenSanPham}"></td>
+            <td th:text="${donHang.giaSanPham}"></td>
+            <td th:text="${donHang.loaiSanPham}"></td>
+            <td th:text="${donHang.ngayMua}"></td>
+            <td th:text="${donHang.soLuong}"></td>
+            <td th:text="${donHang.tongTien}"></td>
+            <td><a href="#" class="btn btn-warning">Chỉnh sửa</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
